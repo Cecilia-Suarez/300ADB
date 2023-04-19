@@ -29,12 +29,14 @@ function renderizarSocios(listado) {
         <li class="descripcionSocio">${socio.name} ${socio.lastName} || Cédula: ${socio.documentId}</li>
         <a href="../html/fichaSocio.html"><button class="ficha" id=${socio.documentId}>Ficha</button></a>
         <a href="../html/actualizar.html"><button class="update" id=${socio.documentId}-${socio.id}>Actualizar Datos</button></a>
+        <button class="pay" id=${socio.documentId}-${socio.id}>Pagar</button></a>
         <button class="delete" id=${socio.id}>Borrar Socio</b>
         </div>`
     });
     botonBorrar()
     botonActualizar()
     botonFicha()
+    botonPagar()
 
 }
 
@@ -45,11 +47,13 @@ function renderizarSocio(socio) {
         <li class="descripcionSocio">${socio.name} ${socio.lastName}</li>
         <a href="../html/fichaSocio.html"><button class="ficha" id=${socio.id}>Ficha</button></a>
         <a href="../html/actualizar.html"><button class="update"  id=${socio.documentId}-${socio.id}>Actualizar Datos</button></a>
+        <button class="pay" id=${socio.documentId}-${socio.id}>Pagar</button>
         <button class="delete" id=${socio.id}>Borrar Socio</b>
         </div>`
     botonBorrar()
     botonActualizar()
     botonFicha()
+    botonPagar()
 }
 
 /* -------------------------------------------------------------------------- */
@@ -142,4 +146,41 @@ function botonFicha() {
             window.location.href = "fichaSocio.html"; // Redirecciona a la página "ficha.html"
         });
     })
+}
+
+function botonPagar() {
+    const fichas = document.querySelectorAll(".pay");
+    const payedSocio = ""
+    fichas.forEach(ficha => {
+        ficha.addEventListener("click", function (evento) {
+            var ids = evento.target.id.split("-");
+
+            if (confirm("Se pagará un mes para el socio, ¿Estás seguro?")) {
+                pagarSocio(ids[1])
+            }
+            window.localStorage.setItem('id', ids[1]);
+            window.localStorage.setItem('documentId', ids[0]);
+            window.location.href = "fichaSocio.html"; // Redirecciona a la página "ficha.html"
+        });
+    })
+}
+
+function pagarSocio(id) {
+    const pagar = {
+        method: "post",
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+        },
+    };
+
+    fetch(`${url}pay/${id}`, pagar)
+        .then(function (response) {
+            return response.json();
+        }).then(socio => {
+            if (socio.code != 200) {
+                alert("No se encontro el Socio con el documento: " + id)
+                return
+            }
+        })
+        .catch(error => console.log(error));
 }

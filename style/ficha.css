@@ -1,52 +1,276 @@
-@import url('./globalStyles.css');
-
-body,
-header {
+body{
     display: flex;
     flex-wrap: wrap;
-    flex-direction: row;
-    background-color: #f7f7f7;
-}
-
-header {
-    align-items: center;
+    margin: 0%;
     flex-direction: column;
-
+    align-items: center;
+    font-family: 'Oxygen', sans-serif;
 }
-
 .imagenes {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px;
+    position: relative;
 }
 
 .logo {
     width: 150px;
     height: auto;
     margin-left: 3%;
-
-
+    position: fixed;
+    left: 10px;
+    top: 10px;
 }
 
-.perfil-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.perfil-container{
+        position: relative; /* Asegura que el div contenedor tenga posición relativa */
+        width: 300px;
+        height: 300px;
 }
 
-.perfil {
-    position: absolute;
-    top: 180px;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 300px;
-    height: 300px;
+.perfil-container > .perfil {
+    position: absolute; /* Asegura que el elemento tenga posición absoluta */
+    width: 100%; /* Asegura que el elemento ocupe todo el ancho disponible */
+    height: 100%; /* Asegura que el elemento ocupe todo el alto disponible */
+    top: 0; /* Ajusta la posición vertical del elemento a la parte superior del div contenedor */
+    left: 0; /* Ajusta la posición horizontal del elemento a la parte izquierda del div contenedor */
     border-radius: 50%;
     border: 2px solid #ff2e2e;
     z-index: 1;
 }
+form {
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    flex-direction: column;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #000;
+  }
+  
+  input[type="text"],
+  input[type="date"],
+  input[type="checkbox"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f5f5f5;
+    font-size: 16px;
+    color: #000;
+    transition: border-color 0.3s ease-in-out;
+  }
+  
+  input[type="text"]:focus,
+  input[type="date"]:focus,
+  input[type="checkbox"]:focus {
+    outline: none;
+    border-color: #ff2e2e;
+  }
+  
+  .actividad {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
+    justify-content: flex-start;
+  }
+  
+  .actividad label {
+    width: 200px;
+    height: fit-content;
+  }
+  
+  .actividad input[type="checkbox"] {
+    margin-left: 0px;
+    width: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
+    justify-content: flex-start;
+  }
 
-footer {
-    color: black;
-}
+  .column input[type="checkbox"] {
+    margin-left: 0px;
+    width: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
+    justify-content: flex-start;
+  }
+  
+  h3 {
+    display: flex;
+    justify-content: left;
+  }
+  
+  .contenedorActividades{
+    margin-bottom: 35px;
+  }
+  
+  #inscribir, #actualizar {
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 99%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #ff2e2e;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+    /* Agrega sombra */
+  }
+  
+  #inscribir:hover, #actualizar:hover {
+    background-color: #000;
+  }
+  
+  .error {
+    color: red;
+    font-size: 14px;
+    font-weight: bold;
+    display: none;
+  }
+  
+  .visible {
+    display: block;
+  }
+  
+  .column {
+    grid-column: span 1;
+  }
+  
+  #formulariox {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px 0; /* Establece 40px de separación vertical y 0 de separación horizontal */
+    column-gap: 60px; /* Establece 60px de separación vertical (sobrescribe la separación vertical definida en 'gap') */
+  }
+  
+  #open-camera,
+  #take-photo {
+    background-color: #ff2e2e;
+    /* Cambia el color de fondo */
+    border: none;
+    color: white;
+    /* Cambia el color del texto */
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 0;
+    margin-left: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    /* Agrega borde redondeado */
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+    /* Agrega sombra */
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  #open-camera:hover,
+  #take-photo:hover {
+    background-color: #000000;
+    /* Cambia el color de fondo al pasar el mouse */
+  }
+  
+  #video {
+    display: block;
+    height: 5px;
+  }
+  
+  .button-container {
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    /* O cualquier ancho deseado */
+  }
+  
+  .video-container {
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    /* O cualquier ancho deseado */
+    margin-bottom: 2px;
+  }
+  
+  
+  footer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin: 0%;
+    width: 100%;
+    flex-direction: column;
+    bottom: 0;
+  }
+  
+  .texto1, .texto2 {
+    display: flex;
+    justify-content: center;
+    color: black; 
+  }
+  
+  .texto1 img {
+    width: 3%;
+    height: auto;
+    margin: 0% 0.5%;
+  }
+  
+  #volver{
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 99%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #ff2e2e;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    /* Agrega sombra */
+  }
+  #volver:hover{
+    background-color: #000;
+  }

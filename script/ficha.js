@@ -1,7 +1,6 @@
 const url = 'http://192.168.1.11:8080/users/'
-const documentId = localStorage.getItem('documentId');
-console.log(documentId); // Imprime "valorGuardado"
-
+const documentid = localStorage.getItem('documentId');
+buscarSocio(documentid)
 const objetoInformacion = {
     name: "",
     lastname: "",
@@ -20,6 +19,42 @@ const objetoInformacion = {
     lastPayment: "",
     expirationDate: "",
 }
+//capturamos todos los nodos
+const names = document.querySelector("#name");
+const lastname = document.querySelector("#lastname");
+const documentId = document.querySelector("#cedula");
+const birdDate = document.querySelector("#nacimiento");
+const address = document.querySelector("#domicilio");
+const phoneNumber = document.querySelector("#phone");
+const emergencyPerson = document.querySelector("#perEme");
+const emergencyNumber = document.querySelector("#telEme");
+const medical = document.querySelector("#mutualista");
+const physicalAptitudeCard = document.querySelector("#cardFisical");
+const publicImage = document.querySelector("#publicImage");
+const activity = document.querySelectorAll("[name=actividades]");
+const profile = document.querySelector('.perfil')
+const inscriptionDate = document.querySelector('#inscriptionDate')
+const lastPayment = document.querySelector('#lastPayment')
+const expirationDate = document.querySelector('#expirationDate')
+
+function llenarObjeto(socio) {
+    objetoInformacion.name = socio.name;
+    objetoInformacion.lastname = socio.lastName;
+    objetoInformacion.documentId = parseInt(socio.documentId);
+    objetoInformacion.birdDate = socio.birdDate;
+    objetoInformacion.address = socio.address;
+    objetoInformacion.phoneNumber = parseInt(socio.phoneNumber);
+    objetoInformacion.emergencyPerson = socio.emergencyPerson;
+    objetoInformacion.emergencyNumber = parseInt(socio.emergencyNumber);
+    objetoInformacion.medical = socio.medical;
+    objetoInformacion.physicalAptitudeCard = socio.physicalAptitudeCard;
+    objetoInformacion.publicImage = socio.publicImage;
+    objetoInformacion.activity = socio.activity;
+    objetoInformacion.profilePicture = socio.profilePicture;
+    objetoInformacion.inscriptionDate = socio.inscriptionDate;
+    objetoInformacion.lastPayment = socio.lastPayment;
+    objetoInformacion.expirationDate = socio.expirationDate
+}
 
 function buscarSocio(id) {
     const buscoSocios = {
@@ -29,7 +64,7 @@ function buscarSocio(id) {
         },
     };
 
-    fetch(`${url}${documentId}`, buscoSocios)
+    fetch(`${url}${documentid}`, buscoSocios)
         .then(function (response) {
             return response.json();
         })
@@ -38,23 +73,60 @@ function buscarSocio(id) {
                 alert("No se encontro el Socio con el documento: " + id)
                 buscar.reset()
                 return
-            } renderizarSocio(socio.data);
+            } llenarObjeto(socio.data);
+            llenarFormulario();
         })
         .catch(error => console.log(error));
 
 
 }
 
-function renderizarSocio(socio) {
-    const contenedorListadoSocios = document.querySelector(".formulariox")
-    contenedorListadoSocios.innerHTML = `
-        <div class="contenedorCadaSocio">
-        <li class="descripcionSocio">${socio.name} ${socio.lastName}</li>
-        <button class="ficha" id=${socio.documentId}>Ficha</button>
-        <a href="../html/inscribir.html"><button class="update" id=${socio.id}>Actualizar Datos</button></a>
-        <button class="delete" id=${socio.id}>Borrar Socio</b>
-        <a href="../html/pagos.html"><button class="pay" id=${socio.id}>Pagos</button></a>
-        </div>`
-    botonBorrar()
-    botonFicha()
+function llenarFormulario() {
+    names.textContent = objetoInformacion.name
+    lastname.textContent = objetoInformacion.lastname;
+    documentId.textContent = objetoInformacion.documentId;
+    birdDate.textContent = objetoInformacion.birdDate
+    address.textContent = objetoInformacion.address;
+    phoneNumber.textContent = objetoInformacion.phoneNumber;
+    emergencyPerson.textContent = objetoInformacion.emergencyPerson;
+    emergencyNumber.textContent = objetoInformacion.emergencyNumber;
+    medical.textContent = objetoInformacion.medical;
+    physicalAptitudeCard.textContent = objetoInformacion.physicalAptitudeCard
+    publicImage.checked = objetoInformacion.publicImage;
+    activity.forEach(actividad => {
+        if (objetoInformacion.activity.includes(actividad.id)) {
+            actividad.checked = "true"
+        }
+        actividad.disabled = true
+    });
+    profile.src = objetoInformacion.profilePicture;
+    inscriptionDate.textContent = objetoInformacion.inscriptionDate
+    lastPayment.textContent = objetoInformacion.lastPayment
+    expirationDate.textContent = objetoInformacion.expirationDate
 }
+
+const form = document.querySelector("#formulariox")
+form.addEventListener('change', () => {
+    //rellenamos el objeto con la información correspondiente
+
+    objetoInformacion.name = names.value;
+    objetoInformacion.lastname = lastname.value;
+    objetoInformacion.documentId = parseInt(documentId.value);
+    objetoInformacion.birdDate = birdDate.value;
+    objetoInformacion.address = address.value;
+    objetoInformacion.phoneNumber = parseInt(phoneNumber.value);
+    objetoInformacion.emergencyPerson = emergencyPerson.value;
+    objetoInformacion.emergencyNumber = parseInt(emergencyNumber.value);
+    objetoInformacion.medical = medical.value;
+    objetoInformacion.physicalAptitudeCard = physicalAptitudeCard.value;
+    objetoInformacion.publicImage = publicImage.checked;
+    activity.forEach(seleccion => {
+        if (seleccion.checked) {
+            objetoInformacion.activity.push(seleccion.id)
+        }
+        return objetoInformacion;
+    });
+    if (profile.src) {
+        objetoInformacion.profilePicture = profile.src
+    }
+})
