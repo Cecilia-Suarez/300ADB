@@ -223,4 +223,3 @@ takePhotoButton.addEventListener('click', () => {
     video.srcObject = null;
 });
 
-
