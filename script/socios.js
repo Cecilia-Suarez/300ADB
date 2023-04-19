@@ -33,6 +33,7 @@ function renderizarSocios(listado) {
         </div>`
     });
     botonBorrar()
+    botonActualizar()
     botonFicha()
 
 }
@@ -47,6 +48,7 @@ function renderizarSocio(socio) {
         <button class="delete" id=${socio.id}>Borrar Socio</b>
         </div>`
     botonBorrar()
+    botonActualizar()
     botonFicha()
 }
 
@@ -117,24 +119,25 @@ function borrarSocio(id) {
         .catch(error => console.log(error));
 }
 
-
-
-function botonFicha() {
-    const fichas = document.querySelector(".ficha");
-    fichas.forEach(ficha => {
-        ficha.addEventListener("click", function (evento) {
-            localStorage.setItem('documentId', evento.target.id);
-            window.location.href = "fichaSocio.html"; // Redirecciona a la página "ficha.html"
-        });
+/* -------------------------------------------------------------------------- */
+/*                            ACTUALIZAR SOCIO                                */
+/* -------------------------------------------------------------------------- */
+function botonActualizar() {
+    const updates = document.querySelectorAll(".update");
+    updates.forEach(update => {
+        update.addEventListener("click", function (evento) {
+            window.localStorage.setItem('id', evento.target.id);
+            window.location.href = "actualizar.html"; // Redirecciona a la página "actualizar.html"
+        })
     })
 }
 
-function botonActualizar() {
-    const updates = document.querySelector(".update");
-    updates.forEach(update => {
-        update.addEventListener("click", function (evento) {
-            localStorage.setItem('id', evento.target.id);
-            window.location.href = "actualizar.html"; // Redirecciona a la página "ficha.html"
+function botonFicha() {
+    const fichas = document.querySelectorAll(".ficha");
+    fichas.forEach(ficha => {
+        ficha.addEventListener("click", function (evento) {
+            window.localStorage.setItem('documentId', evento.target.id);
+            window.location.href = "fichaSocio.html"; // Redirecciona a la página "ficha.html"
         });
     })
 }
