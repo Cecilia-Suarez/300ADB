@@ -1,3 +1,9 @@
+const url = 'http://192.168.1.11:8080/users/'
+const documentid = window.localStorage.getItem('documentId');
+const identificador = window.localStorage.getItem('identificador');
+console.log(documentid + " " +identificador)
+buscarSocio(documentid)
+
 //creamos un objeto vacío
 const objetoInformacion = {
     name: "",
@@ -42,6 +48,30 @@ const publicImage = document.querySelector("#publicImage");
 const activity = document.querySelectorAll("[name=actividades]");
 const profile = document.querySelector('.perfil')
 
+function llenarFormulario() {
+    names.value = objetoInformacion.name
+    lastname.value = objetoInformacion.lastname;
+    documentId.value = objetoInformacion.documentId;
+    var birdParts = objetoInformacion.birdDate.split("-");
+    birdDate.value = birdParts[2] + "-" + birdParts[1] + "-" + birdParts[0]
+    address.value = objetoInformacion.address;
+    phoneNumber.value = objetoInformacion.phoneNumber;
+    emergencyPerson.value = objetoInformacion.emergencyPerson;
+    emergencyNumber.value = objetoInformacion.emergencyNumber;
+    medical.value = objetoInformacion.medical;
+    var cardParts = objetoInformacion.physicalAptitudeCard.split("-");
+    physicalAptitudeCard.value = cardParts[2] + "-" + cardParts[1] + "-" + cardParts[0];
+    publicImage.value = objetoInformacion.publicImage;
+    activity.forEach(actividad => {
+        if (objetoInformacion.activity.includes(actividad.id)) {
+            actividad.attributes.checked = "checked"
+        }
+        return objetoInformacion;
+    });
+    profile.src = objetoInformacion.profilePicture;
+}
+
+
 //capturamos todos los nodos errores
 const errorName = document.querySelector("#nameError");
 const errorLastName = document.querySelector("#lastError");
@@ -67,6 +97,7 @@ function mostrarErrores() {
 const form = document.querySelector("#formulariox")
 form.addEventListener('change', () => {
     //rellenamos el objeto con la información correspondiente
+
     objetoInformacion.name = names.value;
     objetoInformacion.lastname = lastname.value;
     objetoInformacion.documentId = parseInt(documentId.value);
@@ -142,6 +173,25 @@ function validarActividades(campo) {
     return resultado;
 }
 
+
+function actualizarSocio() {
+    const datos = objetoInformacion;
+
+    const settings = {
+        method: 'PUT',
+        body: JSON.stringify(datos),
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+
+        },
+    }
+    fetch(`${url}${id}`, settings)
+        .then((respuesta) => respuesta.json())
+        .then((data) => {
+            console.log(data);
+        });
+}
+
 /* -------------------------------------------------------------------------- */
 /*                                     SUMBIT                                 */
 /* -------------------------------------------------------------------------- */
@@ -156,66 +206,48 @@ form.addEventListener('submit', function (evento) {
         alert("Inscripción realizada OK")
     }
 
-    creoSocio()
+    actualizarSocio()
     form.reset()
 
 });
 
-
-/* -------------------------------------------------------------------------- */
-/*                            ENVIO DATOS BACKEND                             */
-/* -------------------------------------------------------------------------- */
-const url = 'http://192.168.1.11:8080/users/'
-function creoSocio() {
-    const datos = objetoInformacion;
-
-    const settings = {
-        method: 'POST',
-        body: JSON.stringify(datos),
+function buscarSocio(document) {
+    const buscoSocios = {
+        method: "GET",
         headers: {
             'Content-type': 'application/json; charset=UTF-8',
-
         },
-    }
-    fetch(url, settings)
-        .then((respuesta) => respuesta.json())
-        .then((data) => {
-            console.log(data);
-        });
+    };
+
+    fetch(`${url}${document}`, buscoSocios)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(socio => {
+            if (socio.code != 200) {
+                alert("No se encontro el Socio con el documento: " + document)
+                return
+            }
+            llenarObjeto(socio.data);
+            llenarFormulario();
+        })
+        .catch(error => console.log(error));
+
 }
 
+function llenarObjeto(socio) {
+    objetoInformacion.name = socio.name;
+    objetoInformacion.lastname = socio.lastName;
+    objetoInformacion.documentId = parseInt(socio.documentId);
+    objetoInformacion.birdDate = socio.birdDate;
+    objetoInformacion.address = socio.address;
+    objetoInformacion.phoneNumber = parseInt(socio.phoneNumber);
+    objetoInformacion.emergencyPerson = socio.emergencyPerson;
+    objetoInformacion.emergencyNumber = parseInt(socio.emergencyNumber);
+    objetoInformacion.medical = socio.medical;
+    objetoInformacion.physicalAptitudeCard = socio.physicalAptitudeCard;
+    objetoInformacion.publicImage = socio.publicImage;
+    objetoInformacion.activity = socio.activity
+    objetoInformacion.profilePicture = socio.profilePicture
 
-//Camára
-const openCameraButton = document.querySelector('#open-camera');
-const takePhotoButton = document.querySelector('#take-photo');
-const video = document.querySelector('#video');
-const canvas = document.createElement('canvas');
-const context = canvas.getContext('2d');
-
-openCameraButton.addEventListener('click', async () => {
-    try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-        video.srcObject = stream;
-        video.style.border = "2px solid #ff2e2e";
-        video.style.height = "auto";
-        await video.play();
-        takePhotoButton.disabled = false;
-    } catch (error) {
-        console.error('Error al acceder a la cámara', error);
-    }
-});
-
-takePhotoButton.addEventListener('click', () => {
-    video.style.border = "";
-    video.style.height = "5px";
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
-    context.drawImage(video, 0, 0);
-    const imageUrl = canvas.toDataURL('image/png');
-    profile.src = imageUrl;
-    takePhotoButton.disabled = true;
-    video.pause();
-    video.srcObject = null;
-});
-
-
+}

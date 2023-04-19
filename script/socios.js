@@ -28,12 +28,13 @@ function renderizarSocios(listado) {
         <div class="contenedorCadaSocio">
         <li class="descripcionSocio">${socio.name} ${socio.lastName} || Cédula: ${socio.documentId}</li>
         <button class="ficha" id=${socio.documentId}>Ficha</button>
-        <a href="../html/inscribir.html"><button class="update" id=${socio.id}>Actualizar Datos</button></a>
+        <a href="../html/actualizar.html"><button class="update" id=${socio.documentId}>Actualizar Datos</button></a>
         <button class="delete" id=${socio.id}>Borrar Socio</b>
         <a href="../html/pagos.html"><button class="pay" id=${socio.id}>Pagos</button></a>
         </div>`
     });
     botonBorrar()
+    botonActualizar()
 
 }
 
@@ -43,11 +44,12 @@ function renderizarSocio(socio) {
         <div class="contenedorCadaSocio">
         <li class="descripcionSocio">${socio.name} ${socio.lastName}</li>
         <button class="ficha" id=${socio.documentId}>Ficha</button>
-        <a href="../html/inscribir.html"><button class="update" id=${socio.id}>Actualizar Datos</button></a>
+        <a href="../html/inscribir.html"><button class="update" id=${socio.id} name=${socio.documentId}>Actualizar Datos</button></a>
         <button class="delete" id=${socio.id}>Borrar Socio</b>
         <a href="../html/pagos.html"><button class="pay" id=${socio.id}>Pagos</button></a>
         </div>`
     botonBorrar()
+    botonActualizar()
 }
 
 /* -------------------------------------------------------------------------- */
@@ -117,3 +119,15 @@ function borrarSocio(id) {
         .catch(error => console.log(error));
 }
 
+/* -------------------------------------------------------------------------- */
+/*                            ACTUALIZAR SOCIO                                */
+/* -------------------------------------------------------------------------- */
+function botonActualizar() {
+    const updates = document.querySelectorAll(".update");
+    updates.forEach(update => {
+        update.addEventListener("click", function (evento) {
+            window.localStorage.setItem('id', evento.target.id);
+            window.location.href = "actualizar.html"; // Redirecciona a la página "actualizar.html"
+        });
+    })
+}
