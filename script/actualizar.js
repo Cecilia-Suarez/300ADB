@@ -1,7 +1,6 @@
 const url = 'http://192.168.1.11:8080/users/'
 const documentid = window.localStorage.getItem('documentId');
-const identificador = window.localStorage.getItem('identificador');
-console.log(documentid + " " +identificador)
+const id = window.localStorage.getItem('id');
 buscarSocio(documentid)
 
 //creamos un objeto vacío
@@ -52,21 +51,18 @@ function llenarFormulario() {
     names.value = objetoInformacion.name
     lastname.value = objetoInformacion.lastname;
     documentId.value = objetoInformacion.documentId;
-    var birdParts = objetoInformacion.birdDate.split("-");
-    birdDate.value = birdParts[2] + "-" + birdParts[1] + "-" + birdParts[0]
+    birdDate.value = objetoInformacion.birdDate
     address.value = objetoInformacion.address;
     phoneNumber.value = objetoInformacion.phoneNumber;
     emergencyPerson.value = objetoInformacion.emergencyPerson;
     emergencyNumber.value = objetoInformacion.emergencyNumber;
     medical.value = objetoInformacion.medical;
-    var cardParts = objetoInformacion.physicalAptitudeCard.split("-");
-    physicalAptitudeCard.value = cardParts[2] + "-" + cardParts[1] + "-" + cardParts[0];
-    publicImage.value = objetoInformacion.publicImage;
+    physicalAptitudeCard.value = objetoInformacion.physicalAptitudeCard
+    publicImage.checked = objetoInformacion.publicImage;
     activity.forEach(actividad => {
         if (objetoInformacion.activity.includes(actividad.id)) {
-            actividad.attributes.checked = "checked"
+            actividad.checked = "true"
         }
-        return objetoInformacion;
     });
     profile.src = objetoInformacion.profilePicture;
 }
@@ -154,7 +150,6 @@ function validarNumeros(campo) {
 }
 
 function validarFecha(campo) {
-    console.log(typeof (campo));
     let resultado = false;
     let timestamp = Date.parse(campo);
     if (isNaN(timestamp)) {
@@ -189,6 +184,7 @@ function actualizarSocio() {
         .then((respuesta) => respuesta.json())
         .then((data) => {
             console.log(data);
+            window.location.href = "socios.html"
         });
 }
 
@@ -251,3 +247,38 @@ function llenarObjeto(socio) {
     objetoInformacion.profilePicture = socio.profilePicture
 
 }
+
+//Camára
+const openCameraButton = document.querySelector('#open-camera');
+const takePhotoButton = document.querySelector('#take-photo');
+const video = document.querySelector('#video');
+const canvas = document.createElement('canvas');
+const context = canvas.getContext('2d');
+
+openCameraButton.addEventListener('click', async () => {
+    try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        video.srcObject = stream;
+        video.style.border = "2px solid #ff2e2e";
+        video.style.height = "auto";
+        await video.play();
+        takePhotoButton.disabled = false;
+    } catch (error) {
+        console.error('Error al acceder a la cámara', error);
+    }
+});
+
+takePhotoButton.addEventListener('click', () => {
+    video.style.border = "";
+    video.style.height = "5px";
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    context.drawImage(video, 0, 0);
+    const imageUrl = canvas.toDataURL('image/png');
+    profile.src = imageUrl;
+    objetoInformacion.profilePicture = imageUrl;
+    takePhotoButton.disabled = true;
+    video.pause();
+    video.srcObject = null;
+});
+

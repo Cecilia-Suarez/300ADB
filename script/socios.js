@@ -28,7 +28,7 @@ function renderizarSocios(listado) {
         <div class="contenedorCadaSocio">
         <li class="descripcionSocio">${socio.name} ${socio.lastName} || Cédula: ${socio.documentId}</li>
         <a href="../html/fichaSocio.html"><button class="ficha" id=${socio.documentId}>Ficha</button></a>
-        <a href="../html/inscribir.html"><button class="update" id=${socio.id}>Actualizar Datos</button></a>
+        <a href="../html/actualizar.html"><button class="update" id=${socio.documentId}-${socio.id}>Actualizar Datos</button></a>
         <button class="delete" id=${socio.id}>Borrar Socio</b>
         </div>`
     });
@@ -43,8 +43,8 @@ function renderizarSocio(socio) {
     contenedorListadoSocios.innerHTML = `
         <div class="contenedorCadaSocio">
         <li class="descripcionSocio">${socio.name} ${socio.lastName}</li>
-        <a href="../html/fichaSocio.html"><button class="ficha" id=${socio.documentId}>Ficha</button></a>
-        <a href="../html/inscribir.html"><button class="update" id=${socio.id}>Actualizar Datos</button></a>
+        <a href="../html/fichaSocio.html"><button class="ficha" id=${socio.id}>Ficha</button></a>
+        <a href="../html/actualizar.html"><button class="update"  id=${socio.documentId}-${socio.id}>Actualizar Datos</button></a>
         <button class="delete" id=${socio.id}>Borrar Socio</b>
         </div>`
     botonBorrar()
@@ -126,7 +126,9 @@ function botonActualizar() {
     const updates = document.querySelectorAll(".update");
     updates.forEach(update => {
         update.addEventListener("click", function (evento) {
-            window.localStorage.setItem('id', evento.target.id);
+            var ids = evento.target.id.split("-");
+            window.localStorage.setItem('id', ids[1]);
+            window.localStorage.setItem('documentId', ids[0]);
             window.location.href = "actualizar.html"; // Redirecciona a la página "actualizar.html"
         })
     })
