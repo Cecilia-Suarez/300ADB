@@ -34,6 +34,7 @@ function renderizarSocios(listado) {
         </div>`
     });
     botonBorrar()
+    botonFicha()
 
 }
 
@@ -48,6 +49,7 @@ function renderizarSocio(socio) {
         <a href="../html/pagos.html"><button class="pay" id=${socio.id}>Pagos</button></a>
         </div>`
     botonBorrar()
+    botonFicha()
 }
 
 /* -------------------------------------------------------------------------- */
@@ -117,3 +119,24 @@ function borrarSocio(id) {
         .catch(error => console.log(error));
 }
 
+
+
+function botonFicha() {
+    const fichas = document.querySelector(".ficha");
+    fichas.forEach(ficha => {
+        ficha.addEventListener("click", function (evento) {
+            localStorage.setItem('documentId', evento.target.id);
+            window.location.href = "fichaSocio.html"; // Redirecciona a la página "ficha.html"
+        });
+    })
+}
+
+function botonActualizar() {
+    const updates = document.querySelector(".update");
+    updates.forEach(update => {
+        update.addEventListener("click", function (evento) {
+            localStorage.setItem('id', evento.target.id);
+            window.location.href = "actualizar.html"; // Redirecciona a la página "ficha.html"
+        });
+    })
+}

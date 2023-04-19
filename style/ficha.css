@@ -1,0 +1,52 @@
+@import url('./globalStyles.css');
+
+body,
+header {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    background-color: #f7f7f7;
+}
+
+header {
+    align-items: center;
+    flex-direction: column;
+
+}
+
+.imagenes {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.logo {
+    width: 150px;
+    height: auto;
+    margin-left: 3%;
+
+
+}
+
+.perfil-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.perfil {
+    position: absolute;
+    top: 180px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    border: 2px solid #ff2e2e;
+    z-index: 1;
+}
+
+footer {
+    color: black;
+}
