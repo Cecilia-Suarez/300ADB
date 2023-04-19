@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxygen&display=swap');
+
+:root {
+  --negro: #000000ff;
+  --oscuro: #000000;
+
+  --app-grey: #F2F2F2;
+  --azul: #3333ffff;
+  --azul-hover: rgb(40, 40, 197);
+  --verde: #00cc7eff;
+  --rosa: #ff76e2ff;
+  --lila: #8a6df1ff;
+  --laranja: #ff7059ff;
+  --amarelo: #ffc51aff;
+
+}
+
+body{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0%;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Oxygen', sans-serif;
+}
+
+
+/*footer*/
+footer{
+    justify-content: center;
+    position: absolute;
+    bottom: 0%;
+    width: 100%;
+}
+
+.texto1, .texto2 {
+    align-self: flex-end;
+    display: flex;
+    justify-content: center;
+    color: rgb(0, 0, 0);
+    
+}
+
+.texto1 img {
+    height: auto;
+    width: 1%;
+    height: 1.5%;
+    margin: 0% 0.5%;
+}
+
+

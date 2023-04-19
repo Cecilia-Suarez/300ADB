@@ -1,0 +1,76 @@
+@import url('./globalStyles.css');
+
+body,
+header {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    background-color: #f7f7f7;
+}
+
+header {
+    align-items: center;
+    flex-direction: column;
+
+}
+
+.container img {
+    width: 10%;
+    height: 10%;
+    margin: 2%;
+
+}
+
+.buscadorSocios {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+}
+
+.barraBusqueda {
+    width: 50%;
+    padding: 0.3%;
+    margin-right: 2%;
+}
+
+.listadoSocios {
+    display: flex;
+    list-style: none;
+    padding: 1.5px;
+    flex-direction: column;
+    width: 150%;
+}
+
+.container {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    padding: 0% 5%;
+}
+
+.botones {
+    display: flex;
+    justify-content: space-around;
+    padding: 1.5px;
+}
+
+.descripcionSocio {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+}
+
+.contenedorCadaSocio {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 8px;
+    background-color: white;
+    border-radius: 5px;
+    padding: 3px;
+}
+
+footer{
+    color: black;
+}
