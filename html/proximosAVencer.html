@@ -11,27 +11,43 @@
 
 
     <!-- ---------------- estilos ---------------- -->
-    <link rel="stylesheet" href="../style/index.css">
+    <link rel="stylesheet" href="../style/pagosAVencer.css">
+
+
+
 
 </head>
 
 <body>
-    <video src="../img/videoFondo.mp4" autoplay muted loop></video>
-    <div class="containerBody">
-        <header class="containerLogo">
-            <img src="../img/logo.png" alt="logo 300ADB">
-        </header>
 
-        <div class="containerButton">
-            <a href="socios.html"><button>Socios</button></a>
-            <a href="inscribir.html"><button>Inscribir</button></a>
-            <a href="proximosAVencer.html"><button>Pagos a vencer</button></a>
+    <!-- cabecera con barra de navegación -->
+    <header class="container">
+        <a href="index.html"><img src="../img/logo.png" alt="logo"></a>
+        <h1>Pagos</h1>
+        <h3>A vencer en los próximos 10 días</h3>
+    </header>
+
+    <main class="contenedor">
+        <div class="datos">
+            <p>Nombre</p>
+            <p>Apellido</p>
+            <p>Cédula de Identidad</p>
+            <p>Teléfono</p>
+            <p>Último Pago</p>
+            <p>Vencimiento</p>
         </div>
-    </div>
+        <ul class="listadoPagos">
+
+        </ul>
+
+    </main>
     <footer>
         <p class="texto1"><b>Made with</b><img class="love" src="../img/love-black.png" alt="love"><b>by DCCS</b></p>
         <p class="texto2"><b>Uruguay 2023 - Todos los derechos reservados</b></p>
     </footer>
+
+
+    <script src="../script/proximosAVencer.js"></script>
 </body>
 
 </html>
