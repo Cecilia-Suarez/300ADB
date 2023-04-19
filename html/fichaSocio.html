@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>300 Academia de Boxeo</title>
+    <link rel="icon" type="image/x-icon" href="../img/logo.png">
+    <meta name="description" content="300 Academia de Boxeo - Base de Datos" />
+
+
+    <!-- ---------------- estilos ---------------- -->
+    <link rel="stylesheet" href="../style/ficha.css">
+
+    <!-- ---------------------- logica ----------------------- -->
+
+
+</head>
+
+<body>
+
+    <!-- cabecera con barra de navegación -->
+    <header class="container">
+        <div class="imagenes">
+            <img src="../img/logo.png" alt="Logo" class="logo">
+            <div class="perfil-container">
+                <img src="https://via.placeholder.com/300" alt="Perfil" class="perfil">
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- contenedor vacío para los socios -->
+        <form id="formulariox">
+            <div class="column">
+                <div>
+                    <label for="name">Nombres</label>
+                    <p class="text" id="name"></p>
+                </div>
+                <div>
+                    <label for="lastName">Apellidos</label>
+                    <p class="text" id="lastname"></p>
+                </div>
+            </div>
+            <div class="column">
+                <div>
+                    <label for="cedula">Documento</label>
+                    <p class="text" id="cedula"></p>
+                </div>
+                <div>
+                    <label for="nacimiento">Fecha de Nacimiento</label>
+                    <p class="text" id="nacimiento"></p>
+                </div>
+            </div>
+            <div class="column">
+                <div>
+                    <label for="domicilio">Dirección</label>
+                    <p class="text" id="domicilio"></p>
+                </div>
+                <div>
+                    <label for="phone">Teléfono</label>
+                    <p class="text" id="phone"></p>
+                </div>
+                <div>
+                    <label for="cardFisical">Carnet de aptitud física</label>
+                    <p class="text" id="cardFisical"></p>
+                </div>
+            </div>
+            <div class="column">
+                <div>
+                    <label for="mutualista">Mutualista</label>
+                    <p class="text" id="mutualista"></p>
+                </div>
+                <div>
+                    <label for="perEme">Persona Emergencia</label>
+                    <p class="text" id="perEme"></p>
+                </div>
+                <div>
+                    <label for="telEme">Teléfono Emergencia</label>
+                    <p class="text" id="telEme"></p>
+                </div>
+            </div>
+            <div class="column">
+                <div>
+                    <label for="publicImage">Cesión de imagen</label>
+                    <input type="checkbox" id="publicImage" disabled=true>
+                </div>
+                <div>
+                    <label for="inscriptionDate">Fecha de Inscripción</label>
+                    <p class="text" id="inscriptionDate"></p>
+                </div>
+                <div>
+                    <label for="lastPayment">Último pago</label>
+                    <p class="text" id="lastPayment"></p>
+                </div>
+                <div>
+                    <label for="expirationDate">Vencimiento de cuota</label>
+                    <p class="text" id="expirationDate"></p>
+                </div>
+            </div>
+
+            <div class="contenedorActividades">
+                <h3>Actividades</h3>
+                <ul class="listadoActividades">
+                </ul>
+            </div>
+
+            <button id="inscribir" type="submit">Inscribir</button>
+        </form>
+    </main>
+    <footer>
+        <p class="texto1"><b>Made with</b><img class="love" src="../img/love-black.png" alt="love"><b>by DCCS</b></p>
+        <p class="texto2"><b>Uruguay 2023 - Todos los derechos reservados</b></p>
+    </footer>
+
+
+    <script src="../script/ficha.js"></script>
+</body>
+
+</html>

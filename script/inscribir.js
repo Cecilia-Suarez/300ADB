@@ -1,3 +1,5 @@
+const url = 'http://192.168.1.11:8080/users/'
+
 //creamos un objeto vacío
 const objetoInformacion = {
     name: "",
@@ -165,7 +167,7 @@ form.addEventListener('submit', function (evento) {
 /* -------------------------------------------------------------------------- */
 /*                            ENVIO DATOS BACKEND                             */
 /* -------------------------------------------------------------------------- */
-const url = 'http://192.168.1.11:8080/users/'
+
 function creoSocio() {
     const datos = objetoInformacion;
 

@@ -35,6 +35,7 @@ function renderizarSocios(listado) {
     });
     botonBorrar()
     botonActualizar()
+    botonFicha()
 
 }
 
@@ -50,6 +51,7 @@ function renderizarSocio(socio) {
         </div>`
     botonBorrar()
     botonActualizar()
+    botonFicha()
 }
 
 /* -------------------------------------------------------------------------- */
@@ -128,6 +130,16 @@ function botonActualizar() {
         update.addEventListener("click", function (evento) {
             window.localStorage.setItem('id', evento.target.id);
             window.location.href = "actualizar.html"; // Redirecciona a la página "actualizar.html"
+        })
+    })
+}
+
+function botonFicha() {
+    const fichas = document.querySelectorAll(".ficha");
+    fichas.forEach(ficha => {
+        ficha.addEventListener("click", function (evento) {
+            window.localStorage.setItem('documentId', evento.target.id);
+            window.location.href = "fichaSocio.html"; // Redirecciona a la página "ficha.html"
         });
     })
 }
