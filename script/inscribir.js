@@ -129,7 +129,6 @@ function validarFecha(campo) {
     let resultado = false;
     let timestamp = Date.parse(campo);
     if (isNaN(timestamp)) {
-        console.log("Invalid date format");
     } else {
         resultado = true;
     }
@@ -147,6 +146,7 @@ function validarActividades(campo) {
 /* -------------------------------------------------------------------------- */
 /*                                     SUMBIT                                 */
 /* -------------------------------------------------------------------------- */
+
 form.addEventListener('submit', function (evento) {
     // prevenimos el default para manejar nososotro el comportamiento
     evento.preventDefault();
@@ -156,6 +156,8 @@ form.addEventListener('submit', function (evento) {
 
     if (estadoErroresOK.name && estadoErroresOK.lastname && estadoErroresOK.documentId && estadoErroresOK.birdDate && estadoErroresOK.address && estadoErroresOK.phoneNumber && estadoErroresOK.medical && estadoErroresOK.activity) {
         alert("Inscripción realizada OK")
+    } else {
+        alert("Completa los campos correctamente")
     }
 
     creoSocio()
@@ -183,6 +185,7 @@ function creoSocio() {
         .then((respuesta) => respuesta.json())
         .then((data) => {
             console.log(data);
+            window.location.href= "socios.html"
         });
 }
 
