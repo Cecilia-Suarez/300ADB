@@ -1,4 +1,4 @@
-const url = 'http://192.168.1.11:8080/users/'
+const url = 'http://localhost:8080/users/'
 const documentid = localStorage.getItem('documentId');
 buscarSocio(documentid)
 const objetoInformacion = {

@@ -1,4 +1,4 @@
-const url = 'http://192.168.1.11:8080/users/'
+const url = 'http://localhost:8080/users/'
 
 function obtenerSocios() {
     const pidoSocios = {
@@ -160,7 +160,9 @@ function botonPagar() {
             }
             window.localStorage.setItem('id', ids[1]);
             window.localStorage.setItem('documentId', ids[0]);
-            window.location.href = "fichaSocio.html"; // Redirecciona a la página "ficha.html"
+            setTimeout(function () {
+                window.location.href = "fichaSocio.html"; // Redirecciona a la página "ficha.html" 
+            }, 2000);
         });
     })
 }

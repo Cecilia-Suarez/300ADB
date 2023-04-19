@@ -1,4 +1,4 @@
-const url = 'http://192.168.1.11:8080/users/'
+const url = 'http://localhost:8080/users/'
 const documentid = window.localStorage.getItem('documentId');
 const id = window.localStorage.getItem('id');
 buscarSocio(documentid)
@@ -199,7 +199,7 @@ form.addEventListener('submit', function (evento) {
     console.log(estadoErroresOK);
 
     if (estadoErroresOK.name && estadoErroresOK.lastname && estadoErroresOK.documentId && estadoErroresOK.birdDate && estadoErroresOK.address && estadoErroresOK.phoneNumber && estadoErroresOK.medical && estadoErroresOK.activity) {
-        alert("Inscripción realizada OK")
+        alert("Actualizado con éxito")
     }
 
     actualizarSocio()

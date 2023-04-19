@@ -1,4 +1,4 @@
-const url = 'http://localhost:8080/users/near_to_expire'
+const url = 'http://localhost:8080/users/'
 
 function obtenerSocios() {
     const pidoSocios = {
@@ -8,7 +8,7 @@ function obtenerSocios() {
         },
     };
 
-    fetch(url, pidoSocios)
+    fetch(`${url}near_to_expire`, pidoSocios)
         .then(function (response) {
             return response.json();
         })
@@ -49,7 +49,10 @@ function botonPagar() {
             }
             window.localStorage.setItem('id', ids[1]);
             window.localStorage.setItem('documentId', ids[0]);
-            window.location.href = "fichaSocio.html"; // Redirecciona a la página "ficha.html"
+            setTimeout(function() {
+                 window.location.href = "fichaSocio.html"; // Redirecciona a la página "ficha.html" 
+            }, 2000);
+            
         });
     })
 }
