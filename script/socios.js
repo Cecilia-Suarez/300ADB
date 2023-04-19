@@ -27,10 +27,9 @@ function renderizarSocios(listado) {
         contenedorListadoSocios.innerHTML += `
         <div class="contenedorCadaSocio">
         <li class="descripcionSocio">${socio.name} ${socio.lastName} || Cédula: ${socio.documentId}</li>
-        <button class="ficha" id=${socio.documentId}>Ficha</button>
+        <a href="../html/fichaSocio.html"><button class="ficha" id=${socio.documentId}>Ficha</button></a>
         <a href="../html/inscribir.html"><button class="update" id=${socio.id}>Actualizar Datos</button></a>
         <button class="delete" id=${socio.id}>Borrar Socio</b>
-        <a href="../html/pagos.html"><button class="pay" id=${socio.id}>Pagos</button></a>
         </div>`
     });
     botonBorrar()
@@ -43,10 +42,9 @@ function renderizarSocio(socio) {
     contenedorListadoSocios.innerHTML = `
         <div class="contenedorCadaSocio">
         <li class="descripcionSocio">${socio.name} ${socio.lastName}</li>
-        <button class="ficha" id=${socio.documentId}>Ficha</button>
+        <a href="../html/fichaSocio.html"><button class="ficha" id=${socio.documentId}>Ficha</button></a>
         <a href="../html/inscribir.html"><button class="update" id=${socio.id}>Actualizar Datos</button></a>
         <button class="delete" id=${socio.id}>Borrar Socio</b>
-        <a href="../html/pagos.html"><button class="pay" id=${socio.id}>Pagos</button></a>
         </div>`
     botonBorrar()
     botonFicha()
