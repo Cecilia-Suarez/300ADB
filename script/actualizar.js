@@ -1,6 +1,7 @@
 const url = 'http://localhost:8080/users/'
 const documentid = window.localStorage.getItem('documentId');
 const id = window.localStorage.getItem('id');
+let actividadesSeleccionadas = [];
 buscarSocio(documentid)
 
 //creamos un objeto vacío
@@ -18,6 +19,7 @@ const objetoInformacion = {
     publicImage: false,
     activity: [],
     profilePicture: "",
+    amountToPay: 0,
 }
 
 //creamos un objeto de errores
@@ -30,6 +32,7 @@ const estadoErroresOK = {
     phoneNumber: false,
     medical: false,
     activity: false,
+    amountToPay: false,
 };
 
 //capturamos todos los nodos
@@ -46,6 +49,7 @@ const physicalAptitudeCard = document.querySelector("#cardFisical");
 const publicImage = document.querySelector("#publicImage");
 const activity = document.querySelectorAll("[name=actividades]");
 const profile = document.querySelector('.perfil')
+const amountToPay = document.querySelector('#amount')
 
 function llenarFormulario() {
     names.value = objetoInformacion.name
@@ -65,6 +69,7 @@ function llenarFormulario() {
         }
     });
     profile.src = objetoInformacion.profilePicture;
+    amountToPay.value = objetoInformacion.amountToPay;
 }
 
 
@@ -77,6 +82,7 @@ const errorDomicilio = document.querySelector("#domicilioError");
 const errorTel = document.querySelector("#phoneError");
 const errorMutualista = document.querySelector("#mutualistaError");
 const errorActividades = document.querySelector("#actividadesError");
+const errorAmount = document.querySelector("#amountError");
 
 //mostramos los errores
 function mostrarErrores() {
@@ -88,6 +94,7 @@ function mostrarErrores() {
     estadoErroresOK.phoneNumber ? errorTel.classList.remove('visible') : errorTel.classList.add('visible');
     estadoErroresOK.medical ? errorMutualista.classList.remove('visible') : errorMutualista.classList.add('visible');
     estadoErroresOK.activity ? errorActividades.classList.remove('visible') : errorActividades.classList.add('visible');
+    estadoErroresOK.amountToPay ? errorAmount.classList.remove('visible') : errorAmount.classList.add('visible');
 }
 
 const form = document.querySelector("#formulariox")
@@ -105,16 +112,16 @@ form.addEventListener('change', () => {
     objetoInformacion.medical = medical.value;
     objetoInformacion.physicalAptitudeCard = physicalAptitudeCard.value;
     objetoInformacion.publicImage = publicImage.checked;
+    actividadesSeleccionadas = [];
     activity.forEach(seleccion => {
         if (seleccion.checked) {
-            objetoInformacion.activity.push(seleccion.id)
+            actividadesSeleccionadas.push(seleccion.id);
         }
-        return objetoInformacion;
     });
     if (profile.src) {
         objetoInformacion.profilePicture = profile.src
     }
-
+    objetoInformacion.amountToPay = parseInt(amountToPay.value)
 
     // 👇 actualizo el estado del error segun el estado del usuario
     estadoErroresOK.name = validarString(objetoInformacion.name);
@@ -125,6 +132,8 @@ form.addEventListener('change', () => {
     estadoErroresOK.phoneNumber = validarNumeros(objetoInformacion.phoneNumber);
     estadoErroresOK.medical = validarString(objetoInformacion.medical);
     estadoErroresOK.activity = validarActividades(objetoInformacion.activity);
+    estadoErroresOK.amountToPay = validarNumeros(objetoInformacion.amountToPay)
+
 
     // finalmente muestro los errores presentes
     mostrarErrores();
@@ -184,7 +193,9 @@ function actualizarSocio() {
         .then((respuesta) => respuesta.json())
         .then((data) => {
             console.log(data);
-            window.location.href = "socios.html"
+            setTimeout(function() {
+                window.location.href = "socios.html"; // Redirecciona a la página "ficha.html" 
+           }, 2000);
         });
 }
 
@@ -201,7 +212,7 @@ form.addEventListener('submit', function (evento) {
     if (estadoErroresOK.name && estadoErroresOK.lastname && estadoErroresOK.documentId && estadoErroresOK.birdDate && estadoErroresOK.address && estadoErroresOK.phoneNumber && estadoErroresOK.medical && estadoErroresOK.activity) {
         alert("Actualizado con éxito")
     }
-
+    objetoInformacion.activity = actividadesSeleccionadas;
     actualizarSocio()
     form.reset()
 
@@ -243,8 +254,9 @@ function llenarObjeto(socio) {
     objetoInformacion.medical = socio.medical;
     objetoInformacion.physicalAptitudeCard = socio.physicalAptitudeCard;
     objetoInformacion.publicImage = socio.publicImage;
-    objetoInformacion.activity = socio.activity
-    objetoInformacion.profilePicture = socio.profilePicture
+    objetoInformacion.activity = socio.activity;
+    objetoInformacion.profilePicture = socio.profilePicture;
+    objetoInformacion.amountToPay = parseInt(socio.amountToPay);
 
 }
 

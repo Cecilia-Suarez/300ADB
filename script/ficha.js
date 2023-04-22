@@ -18,6 +18,7 @@ const objetoInformacion = {
     inscriptionDate: "",
     lastPayment: "",
     expirationDate: "",
+    amountToPay: 0,
 }
 //capturamos todos los nodos
 const names = document.querySelector("#name");
@@ -36,6 +37,7 @@ const profile = document.querySelector('.perfil')
 const inscriptionDate = document.querySelector('#inscriptionDate')
 const lastPayment = document.querySelector('#lastPayment')
 const expirationDate = document.querySelector('#expirationDate')
+const amountToPay = document.querySelector('#amount')
 
 function llenarObjeto(socio) {
     objetoInformacion.name = socio.name;
@@ -53,7 +55,8 @@ function llenarObjeto(socio) {
     objetoInformacion.profilePicture = socio.profilePicture;
     objetoInformacion.inscriptionDate = socio.inscriptionDate;
     objetoInformacion.lastPayment = socio.lastPayment;
-    objetoInformacion.expirationDate = socio.expirationDate
+    objetoInformacion.expirationDate = socio.expirationDate;
+    objetoInformacion.amountToPay = socio.amountToPay;
 }
 
 function buscarSocio(id) {
@@ -100,9 +103,10 @@ function llenarFormulario() {
         actividad.disabled = true
     });
     profile.src = objetoInformacion.profilePicture;
-    inscriptionDate.textContent = objetoInformacion.inscriptionDate
-    lastPayment.textContent = objetoInformacion.lastPayment
-    expirationDate.textContent = objetoInformacion.expirationDate
+    inscriptionDate.textContent = objetoInformacion.inscriptionDate;
+    lastPayment.textContent = objetoInformacion.lastPayment;
+    expirationDate.textContent = objetoInformacion.expirationDate;
+    amountToPay.textContent = objetoInformacion.amountToPay;
 }
 
 const form = document.querySelector("#formulariox")
@@ -129,4 +133,5 @@ form.addEventListener('change', () => {
     if (profile.src) {
         objetoInformacion.profilePicture = profile.src
     }
+    objetoInformacion.amountToPay = amountToPay.value;
 })

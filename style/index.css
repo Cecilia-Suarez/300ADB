@@ -4,7 +4,8 @@
     background-color: rgba(0, 0, 0, 0.658);
     border-radius: 1%;
     width: 70%;
-    height: 43.75rem;
+    max-width: 100%; /* Agregado */
+    height: auto; /* Cambiado */
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -12,16 +13,18 @@
     align-content: center;
     box-shadow: 0 0 100px black;
     margin-top: 5%;
-    
 }
 
 .containerLogo{
     display: flex;
     flex-wrap: wrap;
+    justify-content: center; /* Agregado */
 }
 
 .containerLogo img{ 
     width: 30%;
+    max-width: 100%; /* Agregado */
+    height: auto; /* Agregado */
     position: relative;
     margin-left: auto;
     margin-right: auto;
@@ -37,6 +40,7 @@ button{
     text-align: center;
     cursor: pointer;
     width: 15.625rem;
+    max-width: 100%; /* Agregado */
     color: white;
     border: none;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
@@ -50,10 +54,13 @@ button:hover{
 .containerButton{
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap; /* Agregado */
 }
 
 video{
     position: fixed;
     z-index: -1;
     height: 100%;
+    width: 100%; /* Agregado */
+    object-fit: cover; /* Agregado */
 }

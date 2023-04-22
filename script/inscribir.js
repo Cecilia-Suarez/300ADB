@@ -15,6 +15,7 @@ const objetoInformacion = {
     publicImage: false,
     activity: [],
     profilePicture: "",
+    amountToPay: 0,
 }
 
 //creamos un objeto de errores
@@ -27,6 +28,7 @@ const estadoErroresOK = {
     phoneNumber: false,
     medical: false,
     activity: false,
+    amountToPay: false,
 };
 
 //capturamos todos los nodos
@@ -43,6 +45,7 @@ const physicalAptitudeCard = document.querySelector("#cardFisical");
 const publicImage = document.querySelector("#publicImage");
 const activity = document.querySelectorAll("[name=actividades]");
 const profile = document.querySelector('.perfil')
+const amountToPay = document.querySelector('#amount')
 
 //capturamos todos los nodos errores
 const errorName = document.querySelector("#nameError");
@@ -53,6 +56,7 @@ const errorDomicilio = document.querySelector("#domicilioError");
 const errorTel = document.querySelector("#phoneError");
 const errorMutualista = document.querySelector("#mutualistaError");
 const errorActividades = document.querySelector("#actividadesError");
+const errorAmount = document.querySelector("#amountError");
 
 //mostramos los errores
 function mostrarErrores() {
@@ -64,6 +68,7 @@ function mostrarErrores() {
     estadoErroresOK.phoneNumber ? errorTel.classList.remove('visible') : errorTel.classList.add('visible');
     estadoErroresOK.medical ? errorMutualista.classList.remove('visible') : errorMutualista.classList.add('visible');
     estadoErroresOK.activity ? errorActividades.classList.remove('visible') : errorActividades.classList.add('visible');
+    estadoErroresOK.amountToPay ? errorAmount.classList.remove('visible') : errorAmount.classList.add('visible');
 }
 
 const form = document.querySelector("#formulariox")
@@ -87,8 +92,9 @@ form.addEventListener('change', () => {
         return objetoInformacion;
     });
     if (profile.src) {
-        objetoInformacion.profilePicture = profile.src
+        objetoInformacion.profilePicture = profile.src;
     }
+    objetoInformacion.amountToPay = parseInt(amountToPay.value);
 
 
     // 👇 actualizo el estado del error segun el estado del usuario
@@ -100,6 +106,7 @@ form.addEventListener('change', () => {
     estadoErroresOK.phoneNumber = validarNumeros(objetoInformacion.phoneNumber);
     estadoErroresOK.medical = validarString(objetoInformacion.medical);
     estadoErroresOK.activity = validarActividades(objetoInformacion.activity);
+    estadoErroresOK.amountToPay = validarNumeros(objetoInformacion.amountToPay)
 
     // finalmente muestro los errores presentes
     mostrarErrores();
@@ -185,7 +192,9 @@ function creoSocio() {
         .then((respuesta) => respuesta.json())
         .then((data) => {
             console.log(data);
-            window.location.href= "socios.html"
+            setTimeout(function() {
+                window.location.href = "socios.html"; // Redirecciona a la página "ficha.html" 
+           }, 2000);
         });
 }
 
