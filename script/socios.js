@@ -45,7 +45,7 @@ function renderizarSocio(socio) {
     contenedorListadoSocios.innerHTML = `
         <div class="contenedorCadaSocio">
         <li class="descripcionSocio">${socio.name} ${socio.lastName}</li>
-        <a href="../html/fichaSocio.html"><button class="ficha" id=${socio.id}>Ficha</button></a>
+        <a href="../html/fichaSocio.html"><button class="ficha" id=${socio.documentId}>Ficha</button></a>
         <a href="../html/actualizar.html"><button class="update"  id=${socio.documentId}-${socio.id}>Actualizar Datos</button></a>
         <button class="pay" id=${socio.documentId}-${socio.id}>Pagar</button>
         <button class="delete" id=${socio.id}>Borrar Socio</b>

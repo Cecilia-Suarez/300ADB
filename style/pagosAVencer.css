@@ -96,8 +96,8 @@ h3 {
 
 .contenedorCadaMoroso .tel,
 .ultimoPago,
-.vto {
-    justify-content: flex-end;
+.vto, .monto {
+    justify-content: center;
     width: 14.28%;
     display: flex;
 }

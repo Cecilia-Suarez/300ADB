@@ -32,6 +32,7 @@ function renderizarSocios(listado) {
         <p class="tel">${socio.phoneNumber}</p>
         <p class="ultimoPago"> ${socio.lastPayment}</p>
         <p class="vto">${socio.expirationDate}</p>
+        <p class="monto">$${socio.amountToPay}</p>
         <button class="pagar" id=${socio.documentId}-${socio.id}>Pagar</button> 
         </div>`
     });
