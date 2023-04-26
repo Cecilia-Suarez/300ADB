@@ -76,7 +76,8 @@ function buscarSocio(id) {
                 alert("No se encontro el Socio con el documento: " + id)
                 buscar.reset()
                 return
-            } llenarObjeto(socio.data);
+            } 
+            llenarObjeto(socio.data);
             llenarFormulario();
         })
         .catch(error => console.log(error));
@@ -130,8 +131,5 @@ form.addEventListener('change', () => {
         }
         return objetoInformacion;
     });
-    if (profile.src) {
-        objetoInformacion.profilePicture = profile.src
-    }
     objetoInformacion.amountToPay = amountToPay.value;
 })

@@ -121,7 +121,7 @@ h3 {
 
 
 footer {
-    position: absolute;
+    position: relative;
     display: flex;
     align-items: center;
     margin: 0%;
